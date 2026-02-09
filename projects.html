@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Rajat Kumar | Data & AI Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <span class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </span>
+                    <span class="logo-text">Rajat Kumar | Portfolio</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li><a href="skills.html" class="nav-link">Skills</a></li>
+                    <li><a href="research.html" class="nav-link">Research</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Combining AI expertise with practical implementation</p>
+            
+            <div class="projects-list">
+                <!-- Project 1: SmartHeart -->
+                <div class="project-item">
+                    <div class="project-header-detail">
+                        <h3 class="project-title">SmartHeart — Automated Cardiac MRI Planning</h3>
+                        <span class="project-org">Philips Research</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-intro">Developed core components of an AI-driven solution that automates cardiac MRI planning by selecting optimal heart views from low-resolution 3D survey images.</p>
+                        <ul class="project-details">
+                            <li><strong>Key Achievement:</strong> 50% time savings in scan preparation, reducing operator dependence</li>
+                            <li><strong>Pipeline:</strong> Built and integrated four-model system:
+                                <ul class="sub-list">
+                                    <li>Heart Mask (heart localization, ROI extraction, shim volume)</li>
+                                    <li>IQ Assessment (survey quality monitoring)</li>
+                                    <li>Landmark (anatomical landmark detection)</li>
+                                    <li>Plane Prediction (cardiac plane segmentation)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Business Impact:</strong> Expected to generate XM EUR over five years at YK EUR per license</li>
+                            <li><strong>Contributions:</strong> PDLM milestones, BU innovation roadmap planning, RSNA 2025 deliverables</li>
+                            <li><strong>Recognition:</strong> Project publicly highlighted on LinkedIn Video</li>
+                        </ul>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Deep Learning</span>
+                            <span>Medical Imaging</span>
+                            <span>CNN</span>
+                        </div>
+                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7401685925900328961/" target="_blank" class="project-link-btn">View on LinkedIn</a>
+                    </div>
+                </div>
+
+                <!-- Project 2: SmartSpine -->
+                <div class="project-item">
+                    <div class="project-header-detail">
+                        <h3 class="project-title">SmartSpine — Automated Spine MRI Planning</h3>
+                        <span class="project-org">Philips Research</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-intro">Developing an AI-driven solution that automates MRI spine planning across cervical, thoracic, lumbar, and combined 3D surveys.</p>
+                        <ul class="project-details">
+                            <li><strong>Core Model:</strong> nnU-Net based segmentation model for spinal anatomy localization from 3D MR surveys with high accuracy</li>
+                            <li><strong>Features:</strong> Generates multiple 3D planning boxes enabling automated sagittal and axial prescription</li>
+                            <li><strong>Impact:</strong> Reduces manual planning effort and improves workflow consistency and operator-independence</li>
+                            <li><strong>Integration:</strong> Advanced capabilities integrated into broader MR automation roadmap alongside SmartHeart</li>
+                            <li><strong>Coverage:</strong> Supports cervical, thoracic, lumbar, and combined (C, T, C+T, C+L+T) surveys</li>
+                        </ul>
+                        <div class="project-tech">
+                            <span>nnU-Net</span>
+                            <span>3D Segmentation</span>
+                            <span>Medical Imaging</span>
+                            <span>PyTorch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Resume-Aware Chatbot -->
+                <div class="project-item">
+                    <div class="project-header-detail">
+                        <h3 class="project-title">Resume-Aware Chatbot using GenAI</h3>
+                        <span class="project-org">Independent Project</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-intro">Built an intelligent resume-aware chatbot using Retrieval-Augmented Generation (RAG) and Mistral LLM.</p>
+                        <ul class="project-details">
+                            <li><strong>Architecture:</strong> RAG with Sentence Transformers and FAISS for semantic search</li>
+                            <li><strong>Integration:</strong> Integrated with Mistral LLM for context-aware and intelligent responses</li>
+                            <li><strong>Stack:</strong> FastAPI backend with Streamlit frontend for complete end-to-end solution</li>
+                            <li><strong>Capability:</strong> Enables automated, intelligent resume insights and Q&A</li>
+                        </ul>
+                        <div class="project-tech">
+                            <span>RAG</span>
+                            <span>Mistral LLM</span>
+                            <span>FAISS</span>
+                            <span>FastAPI</span>
+                            <span>Streamlit</span>
+                        </div>
+                        <a href="https://resumeawarebot.streamlit.app/" target="_blank" class="project-link-btn">Try the Bot</a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Motion Correction -->
+                <div class="project-item">
+                    <div class="project-header-detail">
+                        <h3 class="project-title">Motion Correction in MRI Spine Images</h3>
+                        <span class="project-org">Philips Research</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-intro">Addressed motion artifacts in MRI spine imaging through deep learning-based correction approaches.</p>
+                        <ul class="project-details">
+                            <li><strong>Simulation:</strong> Generated realistic training and test datasets simulating voluntary and involuntary motion artifacts</li>
+                            <li><strong>Collaboration:</strong> Worked with Clinical Scientist and Data Science Architect on model design</li>
+                            <li><strong>Objective:</strong> Improved robustness of MRI spine imaging through deep learning models</li>
+                            <li><strong>Applications:</strong> Enhanced image quality and diagnostic accuracy in spine MRI</li>
+                        </ul>
+                        <div class="project-tech">
+                            <span>Deep Learning</span>
+                            <span>Medical Imaging</span>
+                            <span>Motion Correction</span>
+                            <span>PyTorch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Performance and Power Modeling -->
+                <div class="project-item">
+                    <div class="project-header-detail">
+                        <h3 class="project-title">Modeling Performance and Power on Disparate Platforms</h3>
+                        <span class="project-org">Open Source | DA-IICT</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-intro">Built ML models to predict system performance and power consumption across diverse hardware platforms.</p>
+                        <ul class="project-details">
+                            <li><strong>Approach:</strong> Used CPU architecture and memory features for prediction modeling</li>
+                            <li><strong>Technique:</strong> Applied transfer learning for generalization across different hardware platforms</li>
+                            <li><strong>Supervision:</strong> Conducted under Prof. Amit Mankodi and co-supervised by Dr. Amit Bhatt</li>
+                            <li><strong>Impact:</strong> Enables informed decisions on hardware selection and optimization</li>
+                        </ul>
+                        <div class="project-tech">
+                            <span>Machine Learning</span>
+                            <span>Transfer Learning</span>
+                            <span>Hardware Modeling</span>
+                            <span>Python</span>
+                        </div>
+                        <a href="https://github.com/rajat-tech-002/Evaluating-Machine-Learning-Models-for-Disparate-Computer-Systems-Performance-Prediction" target="_blank" class="project-link-btn">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 6: NILMTK Contrib Library -->
+                <div class="project-item">
+                    <div class="project-header-detail">
+                        <h3 class="project-title">NILMTK Contrib Library</h3>
+                        <span class="project-org">Open Source</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-intro">Developed a high-level API for the NILMTK-Contrib library for energy disaggregation algorithms.</p>
+                        <ul class="project-details">
+                            <li><strong>API Design:</strong> Seamless execution of multiple energy disaggregation algorithms as extensions</li>
+                            <li><strong>Algorithms:</strong> Implemented state-of-the-art models including:
+                                <ul class="sub-list">
+                                    <li>Denoising Autoencoders</li>
+                                    <li>RNNs and LSTMs</li>
+                                    <li>Classical NILM algorithms</li>
+                                </ul>
+                            </li>
+                            <li><strong>Extension:</strong> Extended NILMTK toolkit with advanced energy monitoring capabilities</li>
+                            <li><strong>Impact:</strong> Improved interface and usability for energy disaggregation research</li>
+                        </ul>
+                        <div class="project-tech">
+                            <span>NILMTK</span>
+                            <span>Deep Learning</span>
+                            <span>RNN/LSTM</span>
+                            <span>Python</span>
+                        </div>
+                        <a href="https://github.com/nilmtk/nilmtk-contrib" target="_blank" class="project-link-btn">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 7: Customer Support Chatbot -->
+                <div class="project-item">
+                    <div class="project-header-detail">
+                        <h3 class="project-title">Customer Support Chatbot</h3>
+                        <span class="project-org">DA-IICT | Academic Project</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-intro">Built a seq2seq conversational chatbot using LSTM-based encoder-decoder architecture.</p>
+                        <ul class="project-details">
+                            <li><strong>Architecture:</strong> Seq2seq model with LSTM-based encoder-decoder framework</li>
+                            <li><strong>Purpose:</strong> Designed to address customer queries with contextual responses</li>
+                            <li><strong>Guidance:</strong> Mentored by Dr. Prasenjit Majumdar (DA-IICT)</li>
+                            <li><strong>Skills Developed:</strong> NLP, Information Retrieval, and conversational modeling</li>
+                            <li><strong>Learning:</strong> Strong foundational experience in modern NLP techniques</li>
+                        </ul>
+                        <div class="project-tech">
+                            <span>Seq2Seq</span>
+                            <span>LSTM</span>
+                            <span>NLP</span>
+                            <span>Keras/TensorFlow</span>
+                        </div>
+                        <a href="https://github.com/rajat-tech-002/ML_Projects/tree/master/Chatbot" target="_blank" class="project-link-btn">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Rajat Kumar. Data & AI Engineer | Generative AI Specialist</p>
+                <p>Building intelligent solutions that transform the future</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
