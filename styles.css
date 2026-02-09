@@ -1415,9 +1415,7 @@ body {
     }
 
     .floating-card {
-        width: 70px !important;
-        height: 70px !important;
-        font-size: 0.8rem;
+        display: none;
     }
 
     .card-content {
@@ -1624,7 +1622,7 @@ body {
     .hero {
         padding-top: 100px;
         min-height: auto;
-        padding-bottom: 20rem;
+        padding-bottom: 4rem;
     }
 
     .hero-content {
