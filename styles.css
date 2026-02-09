@@ -56,6 +56,7 @@ body {
     padding: 1rem 0;
     transition: var(--transition);
     box-shadow: 0 4px 30px rgba(59, 130, 246, 0.2);
+    overflow: visible;
 }
 
 .navbar.scrolled {
@@ -1352,10 +1353,11 @@ body {
     .nav-menu {
         display: none;
         position: fixed;
-        top: 70px;
+        top: 60px;
         left: 0;
         right: 0;
-        width: 100%;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
         background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 100%);
         flex-direction: column;
         gap: 0;
@@ -1363,6 +1365,8 @@ body {
         border-bottom: 2px solid rgba(59, 130, 246, 0.3);
         backdrop-filter: blur(20px);
         z-index: 999;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
     }
 
     .nav-menu.active {
