@@ -1399,6 +1399,11 @@ body {
         display: flex;
     }
 
+    .hero {
+        padding-bottom: 20rem;
+        min-height: auto;
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -1619,7 +1624,7 @@ body {
     .hero {
         padding-top: 100px;
         min-height: auto;
-        padding-bottom: 4rem;
+        padding-bottom: 20rem;
     }
 
     .hero-content {
