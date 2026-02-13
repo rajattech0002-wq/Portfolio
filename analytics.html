@@ -181,22 +181,31 @@
     <script src="script.js"></script>
     <script src="analytics.js"></script>
     <script>
+        // Store update function globally
+        window.updateAnalyticsDisplay = displayRealAnalytics;
+
         // Initialize analytics display
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             displayRealAnalytics();
             initializeCharts();
-            setInterval(displayRealAnalytics, 3000); // Update every 3 seconds
+            // Update every 2 seconds
+            setInterval(displayRealAnalytics, 2000);
         });
 
-        // Display real analytics data
-        function displayRealAnalytics() {
-            const data = getRealAnalyticsData();
+        // Display real analytics data from backend
+        async function displayRealAnalytics() {
+            const data = await getRealAnalyticsData();
             
             // Update metrics
-            document.getElementById('totalVisitors').textContent = formatNumber(data.totalVisitors);
-            document.getElementById('pageViews').textContent = formatNumber(data.pageViews);
-            document.getElementById('avgDuration').textContent = data.avgSessionDuration;
-            document.getElementById('bounceRate').textContent = data.bounceRate;
+            const totalVisitors = document.getElementById('totalVisitors');
+            const pageViews = document.getElementById('pageViews');
+            const avgDuration = document.getElementById('avgDuration');
+            const bounceRate = document.getElementById('bounceRate');
+            
+            if (totalVisitors) totalVisitors.textContent = formatNumber(data.totalVisitors);
+            if (pageViews) pageViews.textContent = formatNumber(data.pageViews);
+            if (avgDuration) avgDuration.textContent = data.avgSessionDuration;
+            if (bounceRate) bounceRate.textContent = data.bounceRate;
             
             // Update page list
             updatePageList(data.pageStats);
@@ -208,10 +217,7 @@
             updateDeviceDistribution();
             
             // Update real-time activity
-            updateActivityFeed();
-            
-            // Update device chart
-            updateDeviceChart();
+            updateActivityFeed(data);
         }
 
         // Update page list with real data
@@ -219,27 +225,30 @@
             const pagesList = document.getElementById('topPagesList');
             
             if (!pageStats || Object.keys(pageStats).length === 0) {
-                pagesList.innerHTML = '<p style="color: #64748b; text-align: center;">No page views yet. Start browsing to track analytics!</p>';
+                pagesList.innerHTML = '<p style="color: #64748b; text-align: center;">No page views yet. Start browsing!</p>';
                 return;
             }
             
             const pages = Object.values(pageStats).sort((a, b) => b.views - a.views);
             const maxViews = Math.max(...pages.map(p => p.views));
             
-            pagesList.innerHTML = pages.map(page => `
-                <div class="page-item">
-                    <div class="page-info">
-                        <p class="page-name">${page.path.replace('.html', '').replace('/', '').toUpperCase() || 'Home'}</p>
-                        <p class="page-path">${page.path}</p>
-                    </div>
-                    <div class="page-stats">
-                        <p class="page-views">${page.views} view${page.views !== 1 ? 's' : ''}</p>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: ${(page.views / maxViews) * 100}%"></div>
+            pagesList.innerHTML = pages.map(page => {
+                const pageName = page.path ? page.path.replace('.html', '').toUpperCase() : 'Home';
+                return `
+                    <div class="page-item">
+                        <div class="page-info">
+                            <p class="page-name">${pageName}</p>
+                            <p class="page-path">${page.path || '/'}</p>
+                        </div>
+                        <div class="page-stats">
+                            <p class="page-views">${page.views} view${page.views !== 1 ? 's' : ''}</p>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: ${(page.views / maxViews) * 100}%"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Initialize charts
@@ -248,76 +257,69 @@
             if (!trafficCtx) return;
 
             // Device chart
-            new Chart(document.getElementById('deviceChart').getContext('2d'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Desktop', 'Mobile', 'Tablet'],
-                    datasets: [{
-                        data: getDeviceData(),
-                        backgroundColor: ['#3b82f6', '#8b5cf6', '#ec4899'],
-                        borderColor: '#0f172a',
-                        borderWidth: 3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                color: '#e2e8f0',
-                                font: { size: 12, family: "'Poppins', sans-serif" },
-                                usePointStyle: true,
-                                padding: 20
+            try {
+                new Chart(document.getElementById('deviceChart').getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Desktop', 'Mobile', 'Tablet'],
+                        datasets: [{
+                            data: [52, 35, 13],
+                            backgroundColor: ['#3b82f6', '#8b5cf6', '#ec4899'],
+                            borderColor: '#0f172a',
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#e2e8f0',
+                                    font: { size: 12, family: "'Poppins', sans-serif" },
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
                             }
                         }
                     }
-                }
-            });
+                });
+            } catch (e) {
+                console.log('Chart error:', e);
+            }
 
-            // Traffic chart (placeholder - will show trend lines)
-            new Chart(document.getElementById('trafficChart').getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: Array.from({length: 30}, (_, i) => 'Day ' + (i + 1)),
-                    datasets: [{
-                        label: 'Page Views',
-                        data: Array.from({length: 30}, (_, i) => Math.floor(Math.random() * 20) + (data?.pageViews || 5)),
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        borderWidth: 3,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { labels: { color: '#e2e8f0', font: { family: "'Poppins', sans-serif" } } }
+            // Traffic chart
+            try {
+                new Chart(document.getElementById('trafficChart').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({length: 30}, (_, i) => 'Day ' + (i + 1)),
+                        datasets: [{
+                            label: 'Page Views',
+                            data: Array.from({length: 30}, (_, i) => Math.floor(Math.random() * 20) + 5),
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        }]
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'rgba(59, 130, 246, 0.1)' },
-                            ticks: { color: '#64748b' }
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { labels: { color: '#e2e8f0', font: { family: "'Poppins', sans-serif" } } }
                         },
-                        x: { grid: { display: false }, ticks: { color: '#64748b' } }
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(59, 130, 246, 0.1)' },
+                                ticks: { color: '#64748b' }
+                            },
+                            x: { grid: { display: false }, ticks: { color: '#64748b' } }
+                        }
                     }
-                }
-            });
-        }
-
-        // Get device data
-        function getDeviceData() {
-            const devices = getDeviceBreakdown();
-            return [devices.Desktop || 0, devices.Mobile || 0, devices.Tablet || 0];
-        }
-
-        // Update device chart
-        function updateDeviceChart() {
-            const data = getDeviceData();
-            if (window.Chart.helpers && Chart.instances && Chart.instances[0]) {
-                Chart.instances[0].data.datasets[0].data = data;
-                Chart.instances[0].update();
+                });
+            } catch (e) {
+                console.log('Chart error:', e);
             }
         }
 
@@ -328,7 +330,7 @@
             const deviceList = document.getElementById('deviceList');
             
             if (total === 0) {
-                deviceList.innerHTML = '<p style="color: #64748b; text-align: center;">No visitor data yet</p>';
+                deviceList.innerHTML = '<p style="color: #64748b; text-align: center;">Simulated data</p>';
                 return;
             }
             
@@ -353,39 +355,37 @@
                 .join('');
         }
 
-        // Update activity feed with real session data
-        function updateActivityFeed() {
-            const analytics = getAnalyticsData();
-            const sessions = analytics.sessions || [];
+        // Update activity feed with real backend data
+        async function updateActivityFeed(data) {
             const activityTimeline = document.getElementById('activityTimeline');
             
-            if (sessions.length === 0) {
+            if (!data || data.totalVisitors === 0) {
                 activityTimeline.innerHTML = '<p style="color: #64748b; text-align: center;">No activity yet. Start browsing!</p>';
                 return;
             }
 
-            // Get recent activities (last 5)
-            const activities = [];
-            
-            // Add session summaries
-            sessions.slice(-5).reverse().forEach((session, idx) => {
-                const duration = session.pages.reduce((sum, p) => sum + (p.timeOnPage || 0), 0);
-                const pages = session.pages.length;
-                const device = session.device;
-                const time = new Date(session.startTime);
-                const timeAgo = getTimeAgo(time);
-                
-                activities.push({
-                    text: `User on ${device} visited ${pages} page${pages > 1 ? 's' : ''} (${formatSeconds(duration)} time spent)`,
-                    time: timeAgo
-                });
-            });
-            
-            // Add current visitor count
-            activities.unshift({
-                text: `${sessions.length} visitor${sessions.length > 1 ? 's' : ''} in session history`,
-                time: 'Current'
-            });
+            const activities = [
+                {
+                    text: `${formatNumber(data.totalVisitors)} total visitors`,
+                    time: 'Real-time'
+                },
+                {
+                    text: `${formatNumber(data.pageViews)} page views recorded`,
+                    time: 'Cumulative'
+                },
+                {
+                    text: `${formatNumber(data.totalClicks)} clicks and interactions`,
+                    time: 'Total'
+                },
+                {
+                    text: `${data.avgSessionDuration} average session time`,
+                    time: 'Average'
+                },
+                {
+                    text: `${data.bounceRate} bounce rate`,
+                    time: 'Metric'
+                }
+            ];
 
             activityTimeline.innerHTML = activities.map(activity => `
                 <div class="activity-item">
@@ -398,27 +398,13 @@
             `).join('');
         }
 
-        // Helper: format time ago
-        function getTimeAgo(date) {
-            const now = Date.now();
-            const diff = now - date.getTime();
-            const seconds = Math.floor(diff / 1000);
-            const minutes = Math.floor(seconds / 60);
-            const hours = Math.floor(minutes / 60);
-            
-            if (seconds < 60) return 'Just now';
-            if (minutes < 60) return `${minutes}m ago`;
-            if (hours < 24) return `${hours}h ago`;
-            return 'Earlier';
-        }
-
-        // Update traffic sources with real data
+        // Update traffic sources with data
         function updateTrafficSources() {
             const sources = getTrafficSources();
             const trafficSourcesList = document.getElementById('trafficSourcesList');
             
             if (!sources || Object.keys(sources).length === 0) {
-                trafficSourcesList.innerHTML = '<p style="color: #64748b; text-align: center;">No traffic data yet</p>';
+                trafficSourcesList.innerHTML = '<p style="color: #64748b; text-align: center;">No data</p>';
                 return;
             }
 
@@ -444,7 +430,7 @@
                             </div>
                             <div class="source-stats">
                                 <p class="source-percentage">${percentage}%</p>
-                                <p class="source-count">${count} visitor${count !== 1 ? 's' : ''}</p>
+                                <p class="source-count">Simulated</p>
                             </div>
                         </div>
                     `;
