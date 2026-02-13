@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Rajat Kumar | Data & AI Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <span class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </span>
+                    <span class="logo-text">Rajat Kumar | Portfolio</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li><a href="skills.html" class="nav-link">Skills</a></li>
+                    <li><a href="research.html" class="nav-link">Research</a></li>
+                    <li><a href="resume.html" class="nav-link">Resume</a></li>
+                    <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="analytics">
+        <div class="container">
+            <h2 class="section-title">Website Analytics</h2>
+            <p class="section-subtitle">Real-time tracking of your portfolio website performance</p>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card metric-primary">
+                    <div class="metric-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="metric-content">
+                        <p class="metric-label">Total Visitors</p>
+                        <h3 class="metric-value" id="totalVisitors">0</h3>
+                        <p class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i> <span id="visitorChange">0%</span> from last session
+                        </p>
+                    </div>
+                </div>
+
+                <div class="metric-card metric-success">
+                    <div class="metric-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="metric-content">
+                        <p class="metric-label">Page Views</p>
+                        <h3 class="metric-value" id="pageViews">0</h3>
+                        <p class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i> <span id="pageViewChange">0%</span> from last session
+                        </p>
+                    </div>
+                </div>
+
+                <div class="metric-card metric-warning">
+                    <div class="metric-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="metric-content">
+                        <p class="metric-label">Avg. Session Duration</p>
+                        <h3 class="metric-value" id="avgDuration">0s</h3>
+                        <p class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i> <span id="durationChange">0%</span> from last session
+                        </p>
+                    </div>
+                </div>
+
+                <div class="metric-card metric-accent">
+                    <div class="metric-icon">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <div class="metric-content">
+                        <p class="metric-label">Bounce Rate</p>
+                        <h3 class="metric-value" id="bounceRate">0%</h3>
+                        <p class="metric-change negative">
+                            <i class="fas fa-arrow-down"></i> <span id="bounceChange">0%</span> from last session
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <!-- Traffic Trend Chart -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Traffic Trend (Last 30 Days)</h3>
+                    <canvas id="trafficChart"></canvas>
+                </div>
+
+                <!-- Device Breakdown Chart -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Device Breakdown</h3>
+                    <canvas id="deviceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Top Pages & Traffic Sources -->
+            <div class="details-grid">
+                <!-- Top Pages -->
+                <div class="details-card">
+                    <h3 class="details-title">Top Pages</h3>
+                    <div class="page-list" id="topPagesList">
+                        <p style="color: #64748b; text-align: center;">No page views yet. Start browsing to track analytics!</p>
+                    </div>
+                </div>
+
+                <!-- Traffic Sources -->
+                <div class="details-card">
+                    <h3 class="details-title">Traffic Sources</h3>
+                    <div class="source-list" id="trafficSourcesList">
+                        <p style="color: #64748b; text-align: center;">No traffic data yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Geographic & Behavioral Data -->
+            <div class="details-grid">
+                <!-- Top Locations -->
+                <div class="details-card">
+                    <h3 class="details-title">Device Distribution</h3>
+                    <div class="location-list" id="deviceList">
+                        <p style="color: #64748b; text-align: center;">No visitor data yet</p>
+                    </div>
+                </div>
+
+                <!-- Real-Time Activity -->
+                <div class="details-card">
+                    <h3 class="details-title">Real-Time Activity</h3>
+                    <div class="activity-timeline" id="activityTimeline">
+                        <p style="color: #64748b; text-align: center;">No activity yet. Start browsing!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="analytics-controls">
+                <button class="control-btn" onclick="clearAnalytics()">
+                    <i class="fas fa-trash"></i> Clear Local Data
+                </button>
+                <button class="control-btn" onclick="exportAnalytics()">
+                    <i class="fas fa-download"></i> Export Report
+                </button>
+                <button class="control-btn" onclick="location.reload()">
+                    <i class="fas fa-sync"></i> Refresh Data
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Rajat Kumar. Data & AI Engineer | Generative AI Specialist</p>
+                <p>Building intelligent solutions that transform the future</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="analytics.js"></script>
+    <script>
+        // Initialize analytics display
+        document.addEventListener('DOMContentLoaded', function() {
+            displayRealAnalytics();
+            initializeCharts();
+            setInterval(displayRealAnalytics, 3000); // Update every 3 seconds
+        });
+
+        // Display real analytics data
+        function displayRealAnalytics() {
+            const data = getRealAnalyticsData();
+            
+            // Update metrics
+            document.getElementById('totalVisitors').textContent = formatNumber(data.totalVisitors);
+            document.getElementById('pageViews').textContent = formatNumber(data.pageViews);
+            document.getElementById('avgDuration').textContent = data.avgSessionDuration;
+            document.getElementById('bounceRate').textContent = data.bounceRate;
+            
+            // Update page list
+            updatePageList(data.pageStats);
+            
+            // Update traffic sources
+            updateTrafficSources();
+            
+            // Update device distribution
+            updateDeviceDistribution();
+            
+            // Update real-time activity
+            updateActivityFeed();
+            
+            // Update device chart
+            updateDeviceChart();
+        }
+
+        // Update page list with real data
+        function updatePageList(pageStats) {
+            const pagesList = document.getElementById('topPagesList');
+            
+            if (!pageStats || Object.keys(pageStats).length === 0) {
+                pagesList.innerHTML = '<p style="color: #64748b; text-align: center;">No page views yet. Start browsing to track analytics!</p>';
+                return;
+            }
+            
+            const pages = Object.values(pageStats).sort((a, b) => b.views - a.views);
+            const maxViews = Math.max(...pages.map(p => p.views));
+            
+            pagesList.innerHTML = pages.map(page => `
+                <div class="page-item">
+                    <div class="page-info">
+                        <p class="page-name">${page.path.replace('.html', '').replace('/', '').toUpperCase() || 'Home'}</p>
+                        <p class="page-path">${page.path}</p>
+                    </div>
+                    <div class="page-stats">
+                        <p class="page-views">${page.views} view${page.views !== 1 ? 's' : ''}</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${(page.views / maxViews) * 100}%"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            const trafficCtx = document.getElementById('trafficChart');
+            if (!trafficCtx) return;
+
+            // Device chart
+            new Chart(document.getElementById('deviceChart').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Desktop', 'Mobile', 'Tablet'],
+                    datasets: [{
+                        data: getDeviceData(),
+                        backgroundColor: ['#3b82f6', '#8b5cf6', '#ec4899'],
+                        borderColor: '#0f172a',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#e2e8f0',
+                                font: { size: 12, family: "'Poppins', sans-serif" },
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Traffic chart (placeholder - will show trend lines)
+            new Chart(document.getElementById('trafficChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 30}, (_, i) => 'Day ' + (i + 1)),
+                    datasets: [{
+                        label: 'Page Views',
+                        data: Array.from({length: 30}, (_, i) => Math.floor(Math.random() * 20) + (data?.pageViews || 5)),
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: '#e2e8f0', font: { family: "'Poppins', sans-serif" } } }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(59, 130, 246, 0.1)' },
+                            ticks: { color: '#64748b' }
+                        },
+                        x: { grid: { display: false }, ticks: { color: '#64748b' } }
+                    }
+                }
+            });
+        }
+
+        // Get device data
+        function getDeviceData() {
+            const devices = getDeviceBreakdown();
+            return [devices.Desktop || 0, devices.Mobile || 0, devices.Tablet || 0];
+        }
+
+        // Update device chart
+        function updateDeviceChart() {
+            const data = getDeviceData();
+            if (window.Chart.helpers && Chart.instances && Chart.instances[0]) {
+                Chart.instances[0].data.datasets[0].data = data;
+                Chart.instances[0].update();
+            }
+        }
+
+        // Update device distribution
+        function updateDeviceDistribution() {
+            const devices = getDeviceBreakdown();
+            const total = Object.values(devices).reduce((a, b) => a + b, 0);
+            const deviceList = document.getElementById('deviceList');
+            
+            if (total === 0) {
+                deviceList.innerHTML = '<p style="color: #64748b; text-align: center;">No visitor data yet</p>';
+                return;
+            }
+            
+            const deviceEmojis = { Desktop: '💻', Mobile: '📱', Tablet: '📱' };
+            deviceList.innerHTML = Object.entries(devices)
+                .filter(([_, count]) => count > 0)
+                .map(([type, count]) => {
+                    const percentage = Math.round((count / total) * 100);
+                    return `
+                        <div class="location-item">
+                            <div class="location-flag">${deviceEmojis[type]}</div>
+                            <div class="location-info">
+                                <p class="location-name">${type}</p>
+                                <p class="location-percentage">${percentage}%</p>
+                            </div>
+                            <div class="location-bar">
+                                <div class="location-progress" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    `;
+                })
+                .join('');
+        }
+
+        // Update activity feed with real session data
+        function updateActivityFeed() {
+            const analytics = getAnalyticsData();
+            const sessions = analytics.sessions || [];
+            const activityTimeline = document.getElementById('activityTimeline');
+            
+            if (sessions.length === 0) {
+                activityTimeline.innerHTML = '<p style="color: #64748b; text-align: center;">No activity yet. Start browsing!</p>';
+                return;
+            }
+
+            // Get recent activities (last 5)
+            const activities = [];
+            
+            // Add session summaries
+            sessions.slice(-5).reverse().forEach((session, idx) => {
+                const duration = session.pages.reduce((sum, p) => sum + (p.timeOnPage || 0), 0);
+                const pages = session.pages.length;
+                const device = session.device;
+                const time = new Date(session.startTime);
+                const timeAgo = getTimeAgo(time);
+                
+                activities.push({
+                    text: `User on ${device} visited ${pages} page${pages > 1 ? 's' : ''} (${formatSeconds(duration)} time spent)`,
+                    time: timeAgo
+                });
+            });
+            
+            // Add current visitor count
+            activities.unshift({
+                text: `${sessions.length} visitor${sessions.length > 1 ? 's' : ''} in session history`,
+                time: 'Current'
+            });
+
+            activityTimeline.innerHTML = activities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-dot"></div>
+                    <div class="activity-content">
+                        <p class="activity-text">${activity.text}</p>
+                        <p class="activity-time">${activity.time}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Helper: format time ago
+        function getTimeAgo(date) {
+            const now = Date.now();
+            const diff = now - date.getTime();
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            
+            if (seconds < 60) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            return 'Earlier';
+        }
+
+        // Update traffic sources with real data
+        function updateTrafficSources() {
+            const sources = getTrafficSources();
+            const trafficSourcesList = document.getElementById('trafficSourcesList');
+            
+            if (!sources || Object.keys(sources).length === 0) {
+                trafficSourcesList.innerHTML = '<p style="color: #64748b; text-align: center;">No traffic data yet</p>';
+                return;
+            }
+
+            const total = Object.values(sources).reduce((a, b) => a + b, 0);
+            const sourceIcons = {
+                'Direct Traffic': 'fa-globe',
+                'Google Search': 'fab fa-google',
+                'LinkedIn': 'fab fa-linkedin',
+                'GitHub': 'fab fa-github',
+                'Referral Links': 'fa-link'
+            };
+
+            trafficSourcesList.innerHTML = Object.entries(sources)
+                .sort((a, b) => b[1] - a[1])
+                .map(([source, count]) => {
+                    const percentage = Math.round((count / total) * 100);
+                    const icon = sourceIcons[source] || 'fa-link';
+                    return `
+                        <div class="source-item">
+                            <div class="source-info">
+                                <i class="fas ${icon}"></i>
+                                <p class="source-name">${source}</p>
+                            </div>
+                            <div class="source-stats">
+                                <p class="source-percentage">${percentage}%</p>
+                                <p class="source-count">${count} visitor${count !== 1 ? 's' : ''}</p>
+                            </div>
+                        </div>
+                    `;
+                })
+                .join('');
+        }
+    </script>
+</body>
+</html>

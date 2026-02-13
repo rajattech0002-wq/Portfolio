@@ -1,3 +1,9 @@
+// ===== ANALYTICS TRACKING INITIALIZATION =====
+// Initialize tracking on all pages
+window.addEventListener('load', function() {
+    initializeTracking();
+});
+
 // ===== SMOOTH SCROLL & NAVBAR EFFECTS =====
 document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.navbar');
