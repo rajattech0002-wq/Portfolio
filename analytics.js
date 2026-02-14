@@ -5,7 +5,7 @@
 const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE = isDevelopment 
     ? 'http://localhost:5000/api/analytics'
-    : 'https://YOUR-RAILWAY-URL/api/analytics'; // Replace with your Railway backend URL
+    : 'https://portfolio-production-7eb5.up.railway.app/api/analytics';
 
 // Track new visitor on first page load
 window.addEventListener('load', function() {
