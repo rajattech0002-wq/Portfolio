@@ -76,13 +76,14 @@ def track_pageview():
     """Record a page view"""
     data = load_analytics()
     page = request.json.get('page', 'home')
+    page_path = request.json.get('path', '/')
     
     # Increment total page views
     data['totalPageViews'] = data['totalPageViews'] + 1
     
-    # Track per-page stats
+    # Track per-page stats with path info
     if page not in data['pageStats']:
-        data['pageStats'][page] = {'views': 0}
+        data['pageStats'][page] = {'views': 0, 'path': page_path}
     data['pageStats'][page]['views'] += 1
     
     save_analytics(data)

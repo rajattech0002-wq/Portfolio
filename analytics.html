@@ -226,16 +226,22 @@
                 return;
             }
             
-            const pages = Object.values(pageStats).sort((a, b) => b.views - a.views);
-            const maxViews = Math.max(...pages.map(p => p.views));
+            // Convert to array and sort by views
+            const pagesArray = Object.entries(pageStats).map(([key, value]) => ({
+                name: key,
+                path: value.path || '/',
+                views: value.views || 0
+            })).sort((a, b) => b.views - a.views);
             
-            pagesList.innerHTML = pages.map(page => {
-                const pageName = page.path ? page.path.replace('.html', '').toUpperCase() : 'Home';
+            const maxViews = Math.max(...pagesArray.map(p => p.views));
+            
+            pagesList.innerHTML = pagesArray.map(page => {
+                const displayName = page.name.charAt(0).toUpperCase() + page.name.slice(1);
                 return `
                     <div class="page-item">
                         <div class="page-info">
-                            <p class="page-name">${pageName}</p>
-                            <p class="page-path">${page.path || '/'}</p>
+                            <p class="page-name">/ ${displayName}</p>
+                            <p class="page-path">${page.path}</p>
                         </div>
                         <div class="page-stats">
                             <p class="page-views">${page.views} view${page.views !== 1 ? 's' : ''}</p>

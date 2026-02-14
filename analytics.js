@@ -37,11 +37,12 @@ async function trackNewVisitor() {
 // Track page view
 async function trackPageViewEvent() {
     try {
-        const page = window.location.pathname.split('/').pop().replace('.html', '') || 'home';
+        const pathname = window.location.pathname;
+        const page = pathname.split('/').pop().replace('.html', '') || 'home';
         const response = await fetch(`${API_BASE}/pageview`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ page })
+            body: JSON.stringify({ page, path: pathname })
         });
         const data = await response.json();
         console.log('Page view tracked:', data);
