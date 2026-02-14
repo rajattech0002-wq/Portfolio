@@ -116,7 +116,7 @@ body {
 }
 
 .nav-link {
-    color: #cbd5e1;
+    color: #1e293b;
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -252,7 +252,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: #cbd5e1;
+    color: #475569;
     margin-bottom: 2rem;
     animation: slideInUp 0.8s ease-out 0.1s backwards;
     line-height: 1.6;
@@ -481,7 +481,7 @@ body {
     margin-top: 4rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(59, 130, 246, 0.2);
-    color: #cbd5e1;
+    color: #475569;
     font-size: 0.9rem;
     animation: slideInUp 0.8s ease-out 0.5s backwards;
 }
@@ -525,7 +525,7 @@ body {
 
 .about-content p {
     font-size: 1.1rem;
-    color: #cbd5e1;
+    color: #475569;
     margin-bottom: 1.5rem;
     line-height: 1.8;
 }
@@ -604,7 +604,7 @@ body {
 }
 
 .stat-item p {
-    color: #cbd5e1;
+    color: #475569;
     font-size: 0.95rem;
 }
 
@@ -673,7 +673,7 @@ body {
 
 .timeline-content h4 {
     font-size: 1.3rem;
-    color: #f1f5f9;
+    color: #1e293b;
     margin-bottom: 0.3rem;
 }
 
@@ -687,7 +687,7 @@ body {
 .timeline-details {
     list-style: none;
     font-size: 0.95rem;
-    color: #cbd5e1;
+    color: #475569;
     line-height: 1.7;
 }
 
@@ -718,7 +718,7 @@ body {
 
 .section-subtitle {
     text-align: center;
-    color: #cbd5e1;
+    color: #475569;
     font-size: 1.1rem;
     margin-bottom: 3rem;
 }
@@ -927,7 +927,7 @@ body {
 .project-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #f1f5f9;
+    color: #1e293b;
     margin: 0;
 }
 
@@ -947,7 +947,7 @@ body {
 }
 
 .project-intro {
-    color: #cbd5e1;
+    color: #475569;
     margin-bottom: 1.5rem;
     line-height: 1.7;
     font-weight: 500;
@@ -956,7 +956,7 @@ body {
 .project-details {
     list-style: none;
     margin-bottom: 1.5rem;
-    color: #cbd5e1;
+    color: #475569;
     line-height: 1.8;
 }
 
@@ -1076,7 +1076,7 @@ body {
 }
 
 .research-text p {
-    color: #cbd5e1;
+    color: #475569;
     margin-bottom: 1rem;
 }
 
@@ -1111,7 +1111,7 @@ body {
 .research-summary li {
     padding: 0.75rem 0;
     border-bottom: 1px solid rgba(139, 92, 246, 0.1);
-    color: #cbd5e1;
+    color: #475569;
     line-height: 1.6;
 }
 
@@ -1170,7 +1170,7 @@ body {
 
 .publication-content h4 {
     font-size: 1.1rem;
-    color: #f1f5f9;
+    color: #1e293b;
     margin-bottom: 0.5rem;
     line-height: 1.5;
 }
@@ -1254,13 +1254,13 @@ body {
 
 .patent-content h4 {
     font-size: 1.1rem;
-    color: #f1f5f9;
+    color: #1e293b;
     margin-bottom: 0.5rem;
     line-height: 1.5;
 }
 
 .patent-status {
-    color: #cbd5e1;
+    color: #475569;
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
@@ -1348,7 +1348,7 @@ body {
 }
 
 .contact-card p {
-    color: #cbd5e1;
+    color: #475569;
     font-size: 0.95rem;
 }
 
@@ -1454,7 +1454,7 @@ body {
 .resume-info p {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #cbd5e1;
+    color: #475569;
     animation: slideInUp 0.8s ease-out 0.2s backwards;
 }
 
@@ -1526,7 +1526,7 @@ body {
         display: block;
         padding: 1rem 1.5rem;
         width: 100%;
-        color: #cbd5e1;
+        color: #1e293b;
     }
 
     .nav-link:hover {
@@ -2213,7 +2213,7 @@ body {
 .chart-title {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #e2e8f0;
+    color: #1e293b;
     margin-bottom: 1.5rem;
 }
 
@@ -2339,7 +2339,7 @@ body {
 
 .source-name {
     font-weight: 600;
-    color: #e2e8f0;
+    color: #1e293b;
 }
 
 .source-stats {
@@ -2382,7 +2382,7 @@ body {
 
 .location-name {
     font-weight: 600;
-    color: #e2e8f0;
+    color: #1e293b;
     margin-bottom: 0.25rem;
 }
 
@@ -2448,7 +2448,7 @@ body {
 }
 
 .activity-text {
-    color: #e2e8f0;
+    color: #1e293b;
     font-weight: 500;
 }
 
