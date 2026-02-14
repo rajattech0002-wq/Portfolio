@@ -34,6 +34,19 @@ def initialize_analytics():
         'totalPageViews': 0,
         'totalClicks': 0,
         'pageStats': {},
+        'deviceStats': {
+            'Desktop': 0,
+            'Mobile': 0,
+            'Tablet': 0
+        },
+        'trafficSources': {
+            'Direct': 0,
+            'Google': 0,
+            'LinkedIn': 0,
+            'GitHub': 0,
+            'Referral': 0,
+            'Other': 0
+        },
         'lastUpdated': datetime.now().isoformat()
     }
 
@@ -82,6 +95,34 @@ def track_click():
     data['totalClicks'] = data['totalClicks'] + 1
     save_analytics(data)
     return jsonify({'success': True, 'totalClicks': data['totalClicks']})
+
+@app.route('/api/analytics/device', methods=['POST'])
+def track_device():
+    """Record device type"""
+    data = load_analytics()
+    device = request.json.get('device', 'Desktop')
+    
+    # Track device type (valid values: Desktop, Mobile, Tablet)
+    if device in data['deviceStats']:
+        data['deviceStats'][device] += 1
+    
+    save_analytics(data)
+    return jsonify({'success': True, 'deviceStats': data['deviceStats']})
+
+@app.route('/api/analytics/traffic', methods=['POST'])
+def track_traffic():
+    """Record traffic source"""
+    data = load_analytics()
+    source = request.json.get('source', 'Direct')
+    
+    # Track traffic source
+    if source in data['trafficSources']:
+        data['trafficSources'][source] += 1
+    else:
+        data['trafficSources']['Other'] += 1
+    
+    save_analytics(data)
+    return jsonify({'success': True, 'trafficSources': data['trafficSources']})
 
 @app.route('/api/analytics/reset', methods=['POST'])
 def reset_analytics():

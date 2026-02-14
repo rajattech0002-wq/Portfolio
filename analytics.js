@@ -15,6 +15,8 @@ window.addEventListener('load', function() {
         sessionStorage.setItem('visited', 'true');
     }
     trackPageViewEvent();
+    trackDeviceType();
+    trackTrafficSource();
     trackAllClicks();
 });
 
@@ -43,6 +45,60 @@ async function trackPageViewEvent() {
         });
         const data = await response.json();
         console.log('Page view tracked:', data);
+    } catch (e) {
+        console.log('Backend not available', e);
+    }
+}
+
+// Detect and track device type
+async function trackDeviceType() {
+    try {
+        const userAgent = navigator.userAgent.toLowerCase();
+        let device = 'Desktop';
+        
+        // Real device detection based on user agent
+        if (/tablet|ipad|android/.test(userAgent) && !/mobile|phone/.test(userAgent)) {
+            device = 'Tablet';
+        } else if (/mobile|phone|iphone|ipod|android/.test(userAgent)) {
+            device = 'Mobile';
+        }
+        
+        const response = await fetch(`${API_BASE}/device`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ device })
+        });
+        const data = await response.json();
+        console.log('Device tracked:', device);
+    } catch (e) {
+        console.log('Backend not available', e);
+    }
+}
+
+// Detect and track traffic source
+async function trackTrafficSource() {
+    try {
+        const referrer = document.referrer.toLowerCase();
+        let source = 'Direct';
+        
+        // Real traffic source detection
+        if (referrer.includes('google')) {
+            source = 'Google';
+        } else if (referrer.includes('linkedin')) {
+            source = 'LinkedIn';
+        } else if (referrer.includes('github')) {
+            source = 'GitHub';
+        } else if (referrer) {
+            source = 'Referral';
+        }
+        
+        const response = await fetch(`${API_BASE}/traffic`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ source })
+        });
+        const data = await response.json();
+        console.log('Traffic source tracked:', source);
     } catch (e) {
         console.log('Backend not available', e);
     }
@@ -110,7 +166,9 @@ async function getRealAnalyticsData() {
         avgSessionDuration: formatSeconds(avgSessionDuration),
         bounceRate: Math.round(bounceRate) + '%',
         pageStats: data.pageStats,
-        totalClicks: data.totalClicks
+        totalClicks: data.totalClicks,
+        deviceStats: data.deviceStats || {},
+        trafficSources: data.trafficSources || {}
     };
 }
 

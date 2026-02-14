@@ -251,19 +251,26 @@
             }).join('');
         }
 
-        // Initialize charts
-        function initializeCharts() {
+        // Initialize charts with real data
+        async function initializeCharts() {
             const trafficCtx = document.getElementById('trafficChart');
             if (!trafficCtx) return;
 
-            // Device chart
+            const data = await getRealAnalyticsData();
+            const devices = data.deviceStats || { Desktop: 0, Mobile: 0, Tablet: 0 };
+            const totalDevices = Object.values(devices).reduce((a, b) => a + b, 0);
+            const deviceData = totalDevices > 0 
+                ? [devices.Desktop || 0, devices.Mobile || 0, devices.Tablet || 0]
+                : [1, 1, 1]; // Show equal split if no data
+
+            // Device chart with real data
             try {
                 new Chart(document.getElementById('deviceChart').getContext('2d'), {
                     type: 'doughnut',
                     data: {
                         labels: ['Desktop', 'Mobile', 'Tablet'],
                         datasets: [{
-                            data: [52, 35, 13],
+                            data: deviceData,
                             backgroundColor: ['#3b82f6', '#8b5cf6', '#ec4899'],
                             borderColor: '#0f172a',
                             borderWidth: 3
@@ -288,7 +295,7 @@
                 console.log('Chart error:', e);
             }
 
-            // Traffic chart
+            // Traffic chart (line chart with historical data)
             try {
                 new Chart(document.getElementById('trafficChart').getContext('2d'), {
                     type: 'line',
@@ -323,36 +330,39 @@
             }
         }
 
-        // Update device distribution
+        // Update device distribution with real data
         function updateDeviceDistribution() {
-            const devices = getDeviceBreakdown();
-            const total = Object.values(devices).reduce((a, b) => a + b, 0);
-            const deviceList = document.getElementById('deviceList');
-            
-            if (total === 0) {
-                deviceList.innerHTML = '<p style="color: #64748b; text-align: center;">Simulated data</p>';
-                return;
-            }
-            
-            const deviceEmojis = { Desktop: '💻', Mobile: '📱', Tablet: '📱' };
-            deviceList.innerHTML = Object.entries(devices)
-                .filter(([_, count]) => count > 0)
-                .map(([type, count]) => {
-                    const percentage = Math.round((count / total) * 100);
-                    return `
-                        <div class="location-item">
-                            <div class="location-flag">${deviceEmojis[type]}</div>
-                            <div class="location-info">
-                                <p class="location-name">${type}</p>
-                                <p class="location-percentage">${percentage}%</p>
+            getRealAnalyticsData().then(data => {
+                const devices = data.deviceStats || {};
+                const total = Object.values(devices).reduce((a, b) => a + b, 0);
+                const deviceList = document.getElementById('deviceList');
+                
+                if (total === 0) {
+                    deviceList.innerHTML = '<p style="color: #64748b; text-align: center;">No device data yet. Keep browsing from different devices!</p>';
+                    return;
+                }
+                
+                const deviceEmojis = { Desktop: '💻', Mobile: '📱', Tablet: '📱' };
+                deviceList.innerHTML = Object.entries(devices)
+                    .filter(([_, count]) => count > 0)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([type, count]) => {
+                        const percentage = Math.round((count / total) * 100);
+                        return `
+                            <div class="location-item">
+                                <div class="location-flag">${deviceEmojis[type]}</div>
+                                <div class="location-info">
+                                    <p class="location-name">${type}</p>
+                                    <p class="location-percentage">${percentage}%</p>
+                                </div>
+                                <div class="location-bar">
+                                    <div class="location-progress" style="width: ${percentage}%"></div>
+                                </div>
                             </div>
-                            <div class="location-bar">
-                                <div class="location-progress" style="width: ${percentage}%"></div>
-                            </div>
-                        </div>
-                    `;
-                })
-                .join('');
+                        `;
+                    })
+                    .join('');
+            });
         }
 
         // Update activity feed with real backend data
@@ -398,44 +408,49 @@
             `).join('');
         }
 
-        // Update traffic sources with data
+        // Update traffic sources with real data
         function updateTrafficSources() {
-            const sources = getTrafficSources();
-            const trafficSourcesList = document.getElementById('trafficSourcesList');
-            
-            if (!sources || Object.keys(sources).length === 0) {
-                trafficSourcesList.innerHTML = '<p style="color: #64748b; text-align: center;">No data</p>';
-                return;
-            }
+            // Get traffic sources from backend via getRealAnalyticsData
+            getRealAnalyticsData().then(data => {
+                const sources = data.trafficSources || {};
+                const trafficSourcesList = document.getElementById('trafficSourcesList');
+                
+                const total = Object.values(sources).reduce((a, b) => a + b, 0);
+                if (total === 0) {
+                    trafficSourcesList.innerHTML = '<p style="color: #64748b; text-align: center;">No traffic data yet. Start visiting from different sources!</p>';
+                    return;
+                }
 
-            const total = Object.values(sources).reduce((a, b) => a + b, 0);
-            const sourceIcons = {
-                'Direct Traffic': 'fa-globe',
-                'Google Search': 'fab fa-google',
-                'LinkedIn': 'fab fa-linkedin',
-                'GitHub': 'fab fa-github',
-                'Referral Links': 'fa-link'
-            };
+                const sourceIcons = {
+                    'Direct': 'fa-globe',
+                    'Google': 'fab fa-google',
+                    'LinkedIn': 'fab fa-linkedin',
+                    'GitHub': 'fab fa-github',
+                    'Referral': 'fa-link',
+                    'Other': 'fa-ellipsis-h'
+                };
 
-            trafficSourcesList.innerHTML = Object.entries(sources)
-                .sort((a, b) => b[1] - a[1])
-                .map(([source, count]) => {
-                    const percentage = Math.round((count / total) * 100);
-                    const icon = sourceIcons[source] || 'fa-link';
-                    return `
-                        <div class="source-item">
-                            <div class="source-info">
-                                <i class="fas ${icon}"></i>
-                                <p class="source-name">${source}</p>
+                trafficSourcesList.innerHTML = Object.entries(sources)
+                    .filter(([_, count]) => count > 0)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([source, count]) => {
+                        const percentage = Math.round((count / total) * 100);
+                        const icon = sourceIcons[source] || 'fa-link';
+                        return `
+                            <div class="source-item">
+                                <div class="source-info">
+                                    <i class="fas ${icon}"></i>
+                                    <p class="source-name">${source}</p>
+                                </div>
+                                <div class="source-stats">
+                                    <p class="source-percentage">${percentage}%</p>
+                                    <p class="source-count">${count} visit${count !== 1 ? 's' : ''}</p>
+                                </div>
                             </div>
-                            <div class="source-stats">
-                                <p class="source-percentage">${percentage}%</p>
-                                <p class="source-count">Simulated</p>
-                            </div>
-                        </div>
-                    `;
-                })
-                .join('');
+                        `;
+                    })
+                    .join('');
+            });
         }
     </script>
 </body>
