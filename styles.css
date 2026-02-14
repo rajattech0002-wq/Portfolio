@@ -32,8 +32,8 @@ html {
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1a0f2e 100%);
-    color: #e2e8f0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    color: #1e293b;
     overflow-x: hidden;
     overflow-y: auto;
     line-height: 1.6;
@@ -53,21 +53,21 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.95) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
     backdrop-filter: blur(20px);
-    border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+    border-bottom: 2px solid rgba(59, 130, 246, 0.2);
     z-index: 10000;
     padding: 1rem 0;
     transition: var(--transition);
-    box-shadow: 0 4px 30px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 30px rgba(59, 130, 246, 0.1);
     overflow: visible;
 }
 
 .navbar.scrolled {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.99) 0%, rgba(15, 23, 42, 0.97) 100%);
-    box-shadow: 0 8px 40px rgba(59, 130, 246, 0.25);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(248, 250, 252, 0.97) 100%);
+    box-shadow: 0 8px 40px rgba(59, 130, 246, 0.15);
     padding: 0.5rem 0;
-    border-bottom: 2px solid rgba(59, 130, 246, 0.4);
+    border-bottom: 2px solid rgba(59, 130, 246, 0.3);
 }
 
 .nav-wrapper {
@@ -1474,11 +1474,11 @@ body {
 
 /* ===== FOOTER ===== */
 .footer {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
-    border-top: 1px solid rgba(59, 130, 246, 0.1);
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
     padding: 3rem 0;
     text-align: center;
-    color: #cbd5e1;
+    color: #475569;
     margin-top: 4rem;
 }
 
@@ -1488,7 +1488,7 @@ body {
 
 .footer-content p:first-child {
     font-weight: 600;
-    color: var(--primary-light);
+    color: var(--primary-dark);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -2079,7 +2079,7 @@ body {
 
 .section-subtitle {
     text-align: center;
-    color: #64748b;
+    color: #1e293b;
     font-size: 1.1rem;
     margin-bottom: 3rem;
 }
@@ -2093,8 +2093,8 @@ body {
 }
 
 .metric-card {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-    border: 2px solid rgba(59, 130, 246, 0.2);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border: 2px solid rgba(59, 130, 246, 0.15);
     border-radius: 15px;
     padding: 1.5rem;
     display: flex;
@@ -2176,7 +2176,7 @@ body {
 .metric-value {
     font-size: 2rem;
     font-weight: 700;
-    color: #e2e8f0;
+    color: #1e293b;
     margin-bottom: 0.5rem;
 }
 
@@ -2230,7 +2230,7 @@ body {
 }
 
 .details-card {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);
     border: 2px solid rgba(139, 92, 246, 0.1);
     border-radius: 15px;
     padding: 1.5rem;
@@ -2239,9 +2239,9 @@ body {
 .details-title {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #e2e8f0;
+    color: #1e293b;
     margin-bottom: 1.5rem;
-    border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+    border-bottom: 2px solid rgba(59, 130, 246, 0.15);
     padding-bottom: 1rem;
 }
 
@@ -2265,7 +2265,7 @@ body {
 
 .page-name {
     font-weight: 600;
-    color: #e2e8f0;
+    color: #1e293b;
     margin-bottom: 0.25rem;
 }
 
