@@ -2,6 +2,7 @@
 """
 Real-time Analytics Backend Server
 All visitors see the same aggregated metrics
+Compatible with PythonAnywhere deployment
 """
 
 from flask import Flask, jsonify, request
@@ -13,6 +14,7 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
+# Data file - PythonAnywhere friendly path
 DATA_FILE = 'analytics_data.json'
 
 def load_analytics():

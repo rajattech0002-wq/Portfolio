@@ -1,7 +1,11 @@
 // ===== REAL ANALYTICS TRACKING SYSTEM =====
 // All visitors see the same aggregated metrics from backend server
 
-const API_BASE = 'http://localhost:5000/api/analytics';
+// Determine API base URL (localhost for dev, Railway for prod)
+const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE = isDevelopment 
+    ? 'http://localhost:5000/api/analytics'
+    : 'https://YOUR-RAILWAY-URL/api/analytics'; // Replace with your Railway backend URL
 
 // Track new visitor on first page load
 window.addEventListener('load', function() {
